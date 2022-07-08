@@ -18,11 +18,7 @@ public class NavigationTests {
     @BeforeMethod
     public void setUp() {
 
-        setUpDesktopSession();
-
-        // Opens the hub via the desktop
-        WebElement bcHubIcon = driver.findElementByName("BCHub");
-        new Actions(driver).doubleClick(bcHubIcon).perform();
+        setUpHubSession();
     }
 
 
@@ -32,28 +28,6 @@ public class NavigationTests {
         driver.closeApp();
         driver.quit();
         Thread.sleep(2000);
-    }
-
-//    @Test
-    public void createStudio() {
-        String addStudioButton_Xpath = "/Pane[@ClassName=\"#32769\"][@Name=\"Desktop 2\"]/Pane[@ClassName=\"Chrome_WidgetWin_1\"][@Name=\"BeatConnect\"]/Document[@ClassName=\"Chrome_RenderWidgetHostHWND\"][@Name=\"BeatConnect\"]/Group[@AutomationId=\"root\"]/Group/Group/Hyperlink";
-
-        addStudioButton_Xpath = "//Document[@ClassName=\"Chrome_RenderWidgetHostHWND\"][@Name=\"BeatConnect\"]/Group[@AutomationId=\"root\"]/Group/Group/Hyperlink";
-
-        driver.findElementByXPath(addStudioButton_Xpath).click();
-
-    }
-
-    @Test
-    public void createProject() {
-
-        String studio = "Automation Studio";
-        String newProject = "New Project";
-
-        driver.findElementByName(studio).click();
-        driver.findElementByName(newProject).click();
-
-
     }
 
     @Test
@@ -67,24 +41,6 @@ public class NavigationTests {
         driver.findElementByName(project).click();
         driver.findElementByName(openSeq).click();
 
-
-    }
-
-    @Test
-    public void closeSequencer() throws InterruptedException {
-
-//        setUpDesktopSession();
-        openSequencer();
-
-        String sequencerIcon = "BeatConnectDaw - 1 running window";
-        String sequencerID = "BeatConnect";
-        String sequencerCloseButton = "close.BeatConnect";
-        String closeWindow = "close";
-
-        // Accessibility ID is the AutomationId
-        driver.findElementByAccessibilityId(sequencerID);
-
-        driver.findElementByAccessibilityId(sequencerCloseButton).click();
 
     }
 
