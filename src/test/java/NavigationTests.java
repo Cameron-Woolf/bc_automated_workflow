@@ -50,7 +50,7 @@ public class NavigationTests {
         // Profile Tab names
         String youTab = "For you";
         String exploreTab = "Explore";
-        String myProfile = "My profile";
+        String myProfile = "My Profile";
 
         // Studio Tab names
         String homeTab = "Home";
@@ -70,6 +70,7 @@ public class NavigationTests {
         driver.findElementByName(homeTab).click();
         driver.findElementByName(exploreTab).click();
         driver.findElementByName(projectsTab).click();
+        driver.findElementByName(myProfile).click();
 
         // Navigate to Automation Studio 1
         driver.findElementByName(studio1).click();
@@ -91,7 +92,7 @@ public class NavigationTests {
         // Element Names
         String projectsTab = "Projects";
         String studio1 = "Automation Studio 1";
-        String project1 = "AS1_Project_1";
+        String project1 = "AS1 Project1";
 
         // Navigate to the correct studio
         driver.findElementByName(studio1).click();
@@ -101,6 +102,21 @@ public class NavigationTests {
 
         // Find the project
         driver.findElementByName(project1);
+    }
+
+    @Test
+    public void openSequencer() {
+
+
+        String project = "Projects";
+        String studio = "Automation Studio 1";
+        String openSeq = "Open v0.0.0";
+
+        driver.findElementByName(studio).click();
+        driver.findElementByName(project).click();
+        driver.findElementByName(openSeq).click();
+
+
     }
 
     // Creates a root desktop session that has access to every Window the desktop can see
