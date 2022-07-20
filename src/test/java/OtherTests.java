@@ -35,11 +35,13 @@ public class OtherTests {
 //    @Test
     public void openSequencer() throws InterruptedException {
 
-        String project = "Projects";
         String studio = "Automation Studio";
+        String projectTab = "Projects";
+        String project = "AS1 Project1";
         String openSeq = "Open v0.0.0";
 
         driver.findElementByName(studio).click();
+        driver.findElementByName(projectTab).click();
         driver.findElementByName(project).click();
         driver.findElementByName(openSeq).click();
 

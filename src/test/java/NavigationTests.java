@@ -32,7 +32,26 @@ public class NavigationTests {
 //        Thread.sleep(2000);
     }
     @Test
-    public void navigateBetweenStudio() {
+    public void navigateBetweenHomeTabs() {
+
+        // Home Tab names
+        String homeTab = "To get missing image descriptions, open the context menu.";
+        String youTab = "For you";
+        String exploreTab = "Explore";
+        String projectsTab = "Projects";
+        String myProfile = "My Profile";
+
+        // Navigate between profile tabs when BC first opens
+        // Must do this before navigating to a studio or test will fail
+        driver.findElementByName(homeTab).click();
+        driver.findElementByName(youTab).click();
+        driver.findElementByName(exploreTab).click();
+        driver.findElementByName(projectsTab).click();
+        driver.findElementByName(myProfile).click();
+
+    }
+    @Test
+    public void navigateBetweenStudios() {
 
         String studio1 = "Automation Studio 1";
         String studio2 = "Automation Studio 2";
@@ -45,32 +64,23 @@ public class NavigationTests {
     }
 
     @Test
-    public void navigateBetweenAllTabs() {
-
-        // Profile Tab names
-        String youTab = "For you";
-        String exploreTab = "Explore";
-        String myProfile = "My Profile";
-
-        // Studio Tab names
-        String homeTab = "Home";
-        String membersTab = "Members";
-        String projectsTab = "Projects";
-        String settingsTab = "Settings";
+    public void navigateBetweenTrayIcons() {
 
         // Tray icon names
         String helpIcon = "?";
 
-        // Studio and profile names
-        String profile = "To get missing image descriptions, open the context menu.";
-        String studio1 = "Automation Studio 1";
+        // Navigate to try icons
+        driver.findElementByName(helpIcon).click();
+    }
+    @Test
+    public void navigateBetweenStudioTabs() {
 
-        // Navigate between profile tabs when BC first opens
-        // Must do this before navigating to a studio or test will fail
-        driver.findElementByName(homeTab).click();
-        driver.findElementByName(exploreTab).click();
-        driver.findElementByName(projectsTab).click();
-        driver.findElementByName(myProfile).click();
+        // Studio Tab names
+        String studio1 = "Automation Studio 1";
+        String homeTab = "Home";
+        String membersTab = "Members";
+        String projectsTab = "Projects";
+        String settingsTab = "Settings";
 
         // Navigate to Automation Studio 1
         driver.findElementByName(studio1).click();
@@ -81,13 +91,15 @@ public class NavigationTests {
         driver.findElementByName(projectsTab).click();
         driver.findElementByName(settingsTab).click();
 
-        // Navigate to try icons
-        driver.findElementByName(helpIcon).click();
-
     }
 
-    @Test
+//    @Test
     public void navigateToProject() {
+
+          /*
+        No way to click on the project title itself because the Name
+        property dynamically changes with the Edited X Days Ago field
+         */
 
         // Element Names
         String projectsTab = "Projects";
@@ -107,36 +119,25 @@ public class NavigationTests {
     @Test
     public void openSequencer() {
 
-
-        String project = "Projects";
         String studio = "Automation Studio 1";
-        String openSeq = "Open v0.0.0";
+        String projectTab = "Projects";
+        /*
+        No way to click on the project title itself because the Name
+        property dynamically changes with the Edited X Days Ago field
+         */
+        String project = "AS1 Project1";
+
+        // Just opening the first project that the is visible to the user.
+        String openSeq = "Open v2.0.0";
 
         driver.findElementByName(studio).click();
-        driver.findElementByName(project).click();
+        driver.findElementByName(projectTab).click();
+//        driver.findElementByName(project).click();
         driver.findElementByName(openSeq).click();
 
 
     }
 
-    // Creates a root desktop session that has access to every Window the desktop can see
-    private void setUpDesktopSession() {
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("app", "Root");
-
-        try {
-            //create webdriver instance
-            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
-        }
-        catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        //provide implicit wait of 10 seconds
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-    }
 
     private void setUpHubSession(){
         DesiredCapabilities capabilities = new DesiredCapabilities();
