@@ -51,6 +51,30 @@ public class NavigationTests {
 
     }
     @Test
+    public void navigateBetweenTrayIcons() {
+
+        // Tray icon names
+        String helpIcon = "?";
+
+        // Navigate to try icons
+        driver.findElementByName(helpIcon).click();
+    }
+
+    @Test
+    public void navigateToChallengeFromExploreTab() {
+
+        // Tab names
+        String homeTab = "To get missing image descriptions, open the context menu.";
+        String exploreTab = "Explore";
+        String challengeName = "Challenge Test 1";
+
+        driver.findElementByName(homeTab).click();
+        driver.findElementByName(exploreTab).click();
+        driver.findElementByName(challengeName).click();
+
+
+    }
+    @Test
     public void navigateBetweenStudios() {
 
         String studio1 = "Automation Studio 1";
@@ -63,15 +87,6 @@ public class NavigationTests {
 
     }
 
-    @Test
-    public void navigateBetweenTrayIcons() {
-
-        // Tray icon names
-        String helpIcon = "?";
-
-        // Navigate to try icons
-        driver.findElementByName(helpIcon).click();
-    }
     @Test
     public void navigateBetweenStudioTabs() {
 
