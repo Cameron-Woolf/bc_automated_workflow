@@ -2,9 +2,7 @@ import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,20 +14,26 @@ public class NavigationTests {
     private boolean setUpCompleted = false;
 
     // Ran before each Test Method
-    @BeforeMethod
-    private void setUp() {
 
-        if (!setUpCompleted) {
-            setUpHubSession();
-        }
+    @BeforeClass
+    public void setUp() {
+
+        setUpHubSession();
     }
+//    @BeforeMethod
+//    private void setUp() {
+//
+//        if (!setUpCompleted) {
+//            setUpHubSession();
+//        }
+//    }
 
     // Ran after each Test Method
-    @AfterMethod
-    private void tearDown() throws InterruptedException {
-//        driver.closeApp();
-//        driver.quit();
-//        Thread.sleep(2000);
+    @AfterClass
+    public void tearDown() throws InterruptedException {
+        driver.closeApp();
+        driver.quit();
+        Thread.sleep(2000);
     }
     @Test
     public void navigateBetweenHomeTabs() {
@@ -48,6 +52,7 @@ public class NavigationTests {
         driver.findElementByName(exploreTab).click();
         driver.findElementByName(projectsTab).click();
         driver.findElementByName(myProfile).click();
+
 
     }
     @Test
