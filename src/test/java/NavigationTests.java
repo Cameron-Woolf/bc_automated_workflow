@@ -31,7 +31,7 @@ public class NavigationTests {
     // Ran after each Test Method
     @AfterClass
     public void tearDown() throws InterruptedException {
-        driver.closeApp();
+        driver.closeApp(); // Hub always minimizes to try. How to actually close it?
         driver.quit();
         Thread.sleep(2000);
     }
@@ -139,16 +139,16 @@ public class NavigationTests {
     @Test
     public void openSequencer() {
 
-        String studio = "Automation Studio 1";
+        String studio = "Demo Day Studio";
         String projectTab = "Projects";
         /*
         No way to click on the project title itself because the Name
         property dynamically changes with the Edited X Days Ago field
          */
-        String project = "AS1 Project1";
+        String project = "Demo Day Project 1";
 
         // Just opening the first project that the is visible to the user.
-        String openSeq = "Open v2.0.0";
+        String openSeq = "Open v0.0.0";
 
         driver.findElementByName(studio).click();
         driver.findElementByName(projectTab).click();
