@@ -29,7 +29,7 @@ public class ProjectTests {
 
 
     public void navigateToStudio() {
-        String studio1 = "Automation Studio 2";
+        String studio1 = "Demo Day Studio";
         driver.findElementByName(studio1).click();
     }
 
@@ -39,7 +39,8 @@ public class ProjectTests {
         navigateToStudio();
 
         String projectNew = "New Project";
-        String projectName = "Project name";
+        String projectNameField = "Project name";
+        String projectName = "All your base are belong to us.";
         String submitButton = "Submit";
 
         // Clicks the New Project button
@@ -48,17 +49,31 @@ public class ProjectTests {
         Thread.sleep(1000);
 
         // Clicks the Project Name field
-        driver.findElementByName(projectName).click();
+        driver.findElementByName(projectNameField).click();
 
         Thread.sleep(1000);
 
         // Types in the Project Name
-        driver.findElementByName(projectName).sendKeys("Test Project");
+        driver.findElementByName(projectNameField).sendKeys(projectName);
 
         // Find the submit button
         driver.findElementByName(submitButton).click();
 
         Thread.sleep(2000);
+
+    }
+
+    @Test
+    public void verifyProjectCreatedSuccessfully() throws InterruptedException {
+
+        navigateToStudio();
+        String projectTab = "Projects";
+        String projectName = "All your base are belong to us.";
+
+        driver.findElementByName(projectTab).click();
+        driver.findElementByName(projectName).click();
+
+        Thread.sleep(3000);
 
     }
 
