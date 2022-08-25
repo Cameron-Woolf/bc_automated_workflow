@@ -1,55 +1,130 @@
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 public class GenerateBugForm {
 
-    private final String hub_bug_form =
-     "Name: \n"
-    + "ID: bc_hub_bug_X_XX_XX \n"
-    + "Date: X/XX/XX \n"
-    + "OS/Browser: Windows, Scorpion \n"
-    + "Hub/Sequencer Version: Copyright 0.1.12-alpha / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.10 \n\n"
-    + "Steps: \n\n\n"
-    + "Description: ";
-
-    public WindowsDriver notepadDriver;
+    public WindowsDriver rootDriver;
     public NotepadPO notepad;
+
+    private String bugType = "bc_hub_bug";
+
+    private String date, month, day, dailyBugCount;
+    private String fileName;
+
 
 
     @BeforeClass
-    public void setUpDriver() throws MalformedURLException {
+    public void setUpDriver() throws IOException {
 
-            notepadDriver = setUpNotePadDriver();
+            rootDriver = setUpRootDriver();
+            getDateAndBugCount();
+            setFileName();
+            generateBugFormFile();
 
     }
 
     @Test
-    public void generateBugForm() {
+    private void openBugForm() {
 
-        // Create the notepad PO
-        notepad = new NotepadPO(notepadDriver);
-        notepad.textArea().sendKeys(hub_bug_form);
+        WebElement bugForm = rootDriver.findElementByName(fileName);
+        Actions action = new Actions(rootDriver);
+        action.moveToElement(bugForm);
+        action.doubleClick();
+//        action.build();
+        action.perform();
+    }
+
+    public void generateBugFormFile() throws IOException {
+
+        String bugForm = "C:\\Users\\cawoo\\Desktop\\" + fileName + ".txt";
+        File file = new File(bugForm); //initialize File object and passing path as argument
+        boolean result = file.createNewFile();
+        if (result) {
+            formatBugForm(bugForm);
+
+        }
+        else {
+            System.out.println("File name not unqiue.");
+            Assert.assertTrue(result);
+        }
+
 
     }
 
-    private void saveNotepad() {
+    private void formatBugForm(String fileName) {
+
+        String hub_bug_form =
+                "Name: \n"
+                        + "ID: bc_hub_bug_"+month+"_"+day+"_"+dailyBugCount +"\n"
+                        + "Date: "+ date + "\n"
+                        + "OS/Browser: Windows, Scorpion \n"
+                        + "Hub/Sequencer Version: Copyright 0.1.12-alpha / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.10 \n\n"
+                        + "Steps: \n\n\n"
+                        + "Description: ";
+
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(fileName, true);  // true for append mode
+            byte[] bugFormData = hub_bug_form.getBytes();
+            fileOutputStream.write(bugFormData);
+            fileOutputStream.close();
+            System.out.println("file saved.");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getDateAndBugCount() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");;
+        LocalDateTime now = LocalDateTime.now();
+        date = dateTimeFormatter.format(now);
+        month = date.substring(5,7);
+        day = date.substring(8);
+        dailyBugCount = "0" + String.valueOf(2);
+    }
+
+    private void setFileName() {
+        fileName =
+        bugType +"_" +
+        month + "_" +
+        day + "_" +
+        dailyBugCount;
 
     }
 
-    private WindowsDriver setUpNotePadDriver() throws MalformedURLException {
+    private String getBugCount() {
+        return "";
+    }
+
+    private String setBugCount() {
+        return "";
+    }
+
+    private WindowsDriver setUpRootDriver() throws MalformedURLException {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("app", "c:\\windows\\system32\\notepad.exe");
-        WindowsDriver driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
+        capabilities.setCapability("app", "Root");
+        WindowsDriver driver =  new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         return driver;
 
     }
+
 }
