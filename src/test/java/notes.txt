@@ -2,12 +2,12 @@
 Workflow Automation Project
 
 ToDo:
-Get date and add it to the Bug Form
-Generate a correct Bug Id
-    > Implement feature that automatically tracks the daily bug count.
 Create Bug Folder with correct bug Id
 
-Work Log
+****Work Log****
 8/25/22
 Generate Bug form
 Add basic bug template
+Get date and add it to the Bug Form
+Generate a correct Bug Id
+    > Implement feature that automatically tracks the daily bug count.

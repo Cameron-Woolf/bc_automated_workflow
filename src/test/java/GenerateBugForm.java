@@ -13,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
@@ -28,33 +30,49 @@ public class GenerateBugForm {
     private String date, month, day, dailyBugCount;
     private String fileName;
 
-
-
     @BeforeClass
     public void setUpDriver() throws IOException {
 
             rootDriver = setUpRootDriver();
-            bugCounterUtil = new BugCounterUtil();
-            getDateAndBugCount();
-            setFileName();
-            generateBugFormFile();
 
     }
 
     @Test
+    private void generateBugForm() throws IOException {
+
+            bugCounterUtil = new BugCounterUtil();
+            getDateAndBugCount();
+            setFileName();
+            generateBugDirectory();
+            generateBugFormFile();
+            openBugForm();
+
+    }
+
     private void openBugForm() {
 
-        WebElement bugForm = rootDriver.findElementByName(fileName);
+        WebElement bugDirectory = rootDriver.findElementByName(fileName);
         Actions action = new Actions(rootDriver);
-        action.moveToElement(bugForm);
+        action.moveToElement(bugDirectory);
         action.doubleClick();
 //        action.build();
         action.perform();
+
+//        WebElement bugForm = rootDriver.findElementByName("Name");
+//        action.moveToElement(bugForm);
+//        action.doubleClick();
+//        action.perform();
+
+    }
+
+    public void generateBugDirectory() throws IOException {
+        String bugDirectory = "C:\\Users\\cawoo\\Desktop\\" + fileName;
+        Files.createDirectories(Paths.get(bugDirectory));
     }
 
     public void generateBugFormFile() throws IOException {
 
-        String bugForm = "C:\\Users\\cawoo\\Desktop\\" + fileName + ".txt";
+        String bugForm = "C:\\Users\\cawoo\\Desktop\\" + fileName +"\\"+ fileName+ ".txt";
         File file = new File(bugForm); //initialize File object and passing path as argument
         boolean result = file.createNewFile();
         if (result) {
@@ -65,7 +83,6 @@ public class GenerateBugForm {
             System.out.println("File name not unqiue.");
             Assert.assertTrue(result);
         }
-
 
     }
 
@@ -79,7 +96,6 @@ public class GenerateBugForm {
                         + "Hub/Sequencer Version: Copyright 0.1.12-alpha / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.10 \n\n"
                         + "Steps: \n\n\n"
                         + "Description: ";
-
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(fileName, true);  // true for append mode
@@ -113,6 +129,8 @@ public class GenerateBugForm {
 
     }
 
+
+    // Maybe move those out to the Util class..
     private void increaseBugCount() {
         BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile();
         bugCounter.setDate(date);

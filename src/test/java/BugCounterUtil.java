@@ -45,8 +45,7 @@ public class BugCounterUtil {
     // Read the current Bug Counter File
     // Read From File Utility
     public BugCounter readBugCounterFile() {
-        // File: An abstract representation of file and directory pathnames.
-        // User interfaces and operating systems use system-dependent pathname strings to name files and directories.
+
         File bugCounterFile= new File(bugCounterFileLocation);
         BugCounter bugCounter = null;
 
@@ -59,9 +58,6 @@ public class BugCounterUtil {
 
             JsonReader myReader = new JsonReader(isReader);
             bugCounter = gson.fromJson(myReader, BugCounter.class);
-
-//            System.out.println("Date: " + bugCounter.getDate() + "\n" +
-//                    "Bug Count:" + bugCounter.getBugCount());
 
             if(bugCounter == null) {
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");;
