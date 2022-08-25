@@ -21,6 +21,7 @@ public class GenerateBugForm {
 
     public WindowsDriver rootDriver;
     public NotepadPO notepad;
+    public BugCounterUtil bugCounterUtil;
 
     private String bugType = "bc_hub_bug";
 
@@ -33,6 +34,7 @@ public class GenerateBugForm {
     public void setUpDriver() throws IOException {
 
             rootDriver = setUpRootDriver();
+            bugCounterUtil = new BugCounterUtil();
             getDateAndBugCount();
             setFileName();
             generateBugFormFile();
@@ -57,7 +59,7 @@ public class GenerateBugForm {
         boolean result = file.createNewFile();
         if (result) {
             formatBugForm(bugForm);
-
+            increaseBugCount();
         }
         else {
             System.out.println("File name not unqiue.");
@@ -71,7 +73,7 @@ public class GenerateBugForm {
 
         String hub_bug_form =
                 "Name: \n"
-                        + "ID: bc_hub_bug_"+month+"_"+day+"_"+dailyBugCount +"\n"
+                        + "ID: bc_hub_bug_"+month+"_"+day+"_"+0+dailyBugCount +"\n"
                         + "Date: "+ date + "\n"
                         + "OS/Browser: Windows, Scorpion \n"
                         + "Hub/Sequencer Version: Copyright 0.1.12-alpha / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.10 \n\n"
@@ -97,7 +99,7 @@ public class GenerateBugForm {
         date = dateTimeFormatter.format(now);
         month = date.substring(5,7);
         day = date.substring(8);
-        dailyBugCount = "0" + String.valueOf(2);
+        dailyBugCount = getBugCount();
     }
 
     private void setFileName() {
@@ -105,17 +107,29 @@ public class GenerateBugForm {
         bugType +"_" +
         month + "_" +
         day + "_" +
-        dailyBugCount;
+        0+dailyBugCount;
+
+        System.out.println(fileName);
 
     }
+
+    private void increaseBugCount() {
+        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile();
+        bugCounter.setDate(date);
+        bugCounter.increaseBugCount();
+        bugCounterUtil.writeBugCounterFile(bugCounter);
+    }
+
 
     private String getBugCount() {
-        return "";
+
+        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile();
+        System.out.println(bugCounter.getDate());
+        System.out.println(bugCounter.getBugCount());
+
+        return String.valueOf(bugCounter.getBugCount());
     }
 
-    private String setBugCount() {
-        return "";
-    }
 
     private WindowsDriver setUpRootDriver() throws MalformedURLException {
 
