@@ -21,7 +21,7 @@ public class GenerateHubBugForm {
 
     public WindowsDriver rootDriver;
     public NotepadPO notepad;
-    public BugCounterUtil bugCounterUtil;
+    public BugUtil bugUtil;
 
     private String bugType = "bc_hub_bug";
 
@@ -38,7 +38,7 @@ public class GenerateHubBugForm {
     @Test
     private void generateBugForm() throws IOException {
 
-            bugCounterUtil = new BugCounterUtil();
+            bugUtil = new BugUtil();
             getDateAndBugCount();
             setFileName();
             generateBugDirectory();
@@ -130,16 +130,16 @@ public class GenerateHubBugForm {
 
     // Maybe move those out to the Util class..
     private void increaseBugCount() {
-        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile(1);
+        BugUtil.BugCounter bugCounter = bugUtil.readBugCounterFile(1);
         bugCounter.setDate(date);
         bugCounter.increaseBugCount();
-        bugCounterUtil.writeBugCounterFile(1,bugCounter);
+        bugUtil.writeBugCounterFile(1,bugCounter);
     }
 
 
     private String getBugCount() {
 
-        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile(1);
+        BugUtil.BugCounter bugCounter = bugUtil.readBugCounterFile(1);
         System.out.println(bugCounter.getDate());
         System.out.println(bugCounter.getBugCount());
 

@@ -5,9 +5,9 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.stream.Collectors;
 
-public class BugCounterUtil {
+public class BugUtil {
 
     private String bugCounterHubFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_hub_bug_v1.txt";
     private String bugCounterSeqFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_seq_bug_v1.txt";
@@ -84,8 +84,32 @@ public class BugCounterUtil {
         return bugCounter;
     }
 
+    public String readBugFormFile(String fileLocation) {
+
+        String bugForm = "";
+        System.out.println("Bug Util:"+ fileLocation);
+        File bugFormFile = new File(fileLocation);
+        if (!bugFormFile.exists())
+            System.out.println("File doesn't exist");
+
+        try{
+//            isReader = new InputStreamReader(new FileInputStream(bugFormFile), StandardCharsets.UTF_8);
+            bugForm = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(bugFormFile), StandardCharsets.UTF_8))
+                    .lines()
+                    .collect(Collectors.joining("\n"));
+
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return bugForm;
+    }
+
+
     // Save to file Utility
-        public void writeBugCounterFile(int bugType, BugCounter bugCounter) {
+    public void writeBugCounterFile(int bugType, BugCounter bugCounter) {
 
         String jsonBugCount = gson.toJson(bugCounter);
 

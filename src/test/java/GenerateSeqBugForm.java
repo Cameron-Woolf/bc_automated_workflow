@@ -21,7 +21,7 @@ public class GenerateSeqBugForm {
 
     public WindowsDriver rootDriver;
     public NotepadPO notepad;
-    public BugCounterUtil bugCounterUtil;
+    public BugUtil bugUtil;
 
     private String bugType = "bc_seq_bug";
 
@@ -38,7 +38,7 @@ public class GenerateSeqBugForm {
     @Test
     private void generateBugForm() throws IOException {
 
-            bugCounterUtil = new BugCounterUtil();
+            bugUtil = new BugUtil();
             getDateAndBugCount();
             setFileName();
             generateBugDirectory();
@@ -130,16 +130,16 @@ public class GenerateSeqBugForm {
 
     // Maybe move those out to the Util class..
     private void increaseBugCount() {
-        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile(2);
+        BugUtil.BugCounter bugCounter = bugUtil.readBugCounterFile(2);
         bugCounter.setDate(date);
         bugCounter.increaseBugCount();
-        bugCounterUtil.writeBugCounterFile(2, bugCounter);
+        bugUtil.writeBugCounterFile(2, bugCounter);
     }
 
 
     private String getBugCount() {
 
-        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile(2);
+        BugUtil.BugCounter bugCounter = bugUtil.readBugCounterFile(2);
         System.out.println(bugCounter.getDate());
         System.out.println(bugCounter.getBugCount());
 
