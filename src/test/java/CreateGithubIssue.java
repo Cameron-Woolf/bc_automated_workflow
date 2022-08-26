@@ -45,7 +45,7 @@ public class CreateGithubIssue {
     @Test
     public void createGitHubIssue() {
 
-       getCompletedBugForm(2);
+       getCompletedBugForm(1);
 //       getBugName();
        openChrome();
        openGitHubIssues();
