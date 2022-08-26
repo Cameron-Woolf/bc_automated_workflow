@@ -2,7 +2,9 @@
 Workflow Automation Project
 
 ToDo:
-Create Bug Folder with correct bug Id
+Automate putting the bug name and id into test rails
+Automate putting the bug_form into git issues
+Automate linking git issues with test rails
 
 ****Work Log****
 8/25/22
@@ -11,3 +13,4 @@ Add basic bug template
 Get date and add it to the Bug Form
 Generate a correct Bug Id
     > Implement feature that automatically tracks the daily bug count.
+Create Bug Folder with correct bug Id

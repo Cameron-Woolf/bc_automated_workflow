@@ -9,7 +9,8 @@ import java.util.HashMap;
 
 public class BugCounterUtil {
 
-    private String bugCounterFileLocation= "C:\\Users\\cawoo\\Desktop\\bug_counter_v1.txt";
+    private String bugCounterHubFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_hub_bug_v1.txt";
+    private String bugCounterSeqFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_seq_bug_v1.txt";
     private static final Gson gson = new Gson();
 
     public class BugCounter {
@@ -44,10 +45,19 @@ public class BugCounterUtil {
     }
     // Read the current Bug Counter File
     // Read From File Utility
-    public BugCounter readBugCounterFile() {
+    public BugCounter readBugCounterFile(int bugType) {
 
-        File bugCounterFile= new File(bugCounterFileLocation);
+        File bugCounterFile = null;
         BugCounter bugCounter = null;
+
+        if(bugType == 1) {
+            bugCounterFile= new File(bugCounterHubFileLocation);
+
+        } else if (bugType == 2) {
+            bugCounterFile= new File(bugCounterSeqFileLocation);
+
+        }
+
 
         if (!bugCounterFile.exists())
             System.out.println("File doesn't exist");
@@ -75,11 +85,18 @@ public class BugCounterUtil {
     }
 
     // Save to file Utility
-        public void writeBugCounterFile(BugCounter bugCounter) {
+        public void writeBugCounterFile(int bugType, BugCounter bugCounter) {
 
         String jsonBugCount = gson.toJson(bugCounter);
 
-        File bugCounterFile = new File(bugCounterFileLocation);
+            File bugCounterFile = null;
+
+            if(bugType == 1) {
+                bugCounterFile= new File(bugCounterHubFileLocation);
+
+            } else if (bugType == 2) {
+                bugCounterFile= new File(bugCounterSeqFileLocation);
+            }
 
         try {
 

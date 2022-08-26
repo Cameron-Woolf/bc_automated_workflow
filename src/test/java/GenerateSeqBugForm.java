@@ -1,5 +1,4 @@
 import io.appium.java_client.windows.WindowsDriver;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -8,7 +7,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -19,13 +17,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
-public class GenerateBugForm {
+public class GenerateSeqBugForm {
 
     public WindowsDriver rootDriver;
     public NotepadPO notepad;
     public BugCounterUtil bugCounterUtil;
 
-    private String bugType = "bc_hub_bug";
+    private String bugType = "bc_seq_bug";
 
     private String date, month, day, dailyBugCount;
     private String fileName;
@@ -90,7 +88,7 @@ public class GenerateBugForm {
 
         String hub_bug_form =
                 "Name: \n"
-                        + "ID: bc_hub_bug_"+month+"_"+day+"_"+0+dailyBugCount +"\n"
+                        + "ID: bc_seq_bug_"+month+"_"+day+"_"+0+dailyBugCount +"\n"
                         + "Date: "+ date + "\n"
                         + "OS/Browser: Windows, Scorpion \n"
                         + "Hub/Sequencer Version: Copyright 0.1.12-alpha / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.10 \n\n"
@@ -132,16 +130,16 @@ public class GenerateBugForm {
 
     // Maybe move those out to the Util class..
     private void increaseBugCount() {
-        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile();
+        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile(2);
         bugCounter.setDate(date);
         bugCounter.increaseBugCount();
-        bugCounterUtil.writeBugCounterFile(bugCounter);
+        bugCounterUtil.writeBugCounterFile(2, bugCounter);
     }
 
 
     private String getBugCount() {
 
-        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile();
+        BugCounterUtil.BugCounter bugCounter = bugCounterUtil.readBugCounterFile(2);
         System.out.println(bugCounter.getDate());
         System.out.println(bugCounter.getBugCount());
 
