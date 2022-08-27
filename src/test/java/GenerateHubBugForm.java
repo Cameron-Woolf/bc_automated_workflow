@@ -56,10 +56,10 @@ public class GenerateHubBugForm {
 //        action.build();
         action.perform();
 
-//        WebElement bugForm = rootDriver.findElementByName("Name");
-//        action.moveToElement(bugForm);
-//        action.doubleClick();
-//        action.perform();
+        WebElement bugForm = rootDriver.findElementByName(fileName+"_form");
+        action.moveToElement(bugForm);
+        action.doubleClick();
+        action.perform();
 
     }
 
@@ -70,7 +70,7 @@ public class GenerateHubBugForm {
 
     public void generateBugFormFile() throws IOException {
 
-        String bugForm = "C:\\Users\\cawoo\\Desktop\\" + fileName +"\\"+ fileName+ ".txt";
+        String bugForm = "C:\\Users\\cawoo\\Desktop\\" + fileName +"\\"+ fileName+ "_form.txt";
         File file = new File(bugForm); //initialize File object and passing path as argument
         boolean result = file.createNewFile();
         if (result) {

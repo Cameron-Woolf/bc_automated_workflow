@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class BugUtil {
 
-    private String bugCounterHubFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_hub_bug_v1.txt";
-    private String bugCounterSeqFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_seq_bug_v1.txt";
+    private String bugCounterHubFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_bug\\counter_hub_bug_v1.txt";
+    private String bugCounterSeqFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_bug\\counter_seq_bug_v1.txt";
     private static final Gson gson = new Gson();
 
     public class BugCounter {
@@ -136,5 +136,30 @@ public class BugUtil {
         } catch (IOException e) {
 
         }
+    }
+
+    public void resetBugCounters() {
+
+        try {
+
+            File hubBugCounterFile= new File(bugCounterHubFileLocation);
+            File seqBugCounterFile = new File(bugCounterSeqFileLocation);
+
+            FileWriter fileWriter = new FileWriter(hubBugCounterFile.getAbsoluteFile(), false);
+            BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
+
+            bufferWriter.flush();;
+            bufferWriter.close();
+
+            fileWriter = new FileWriter(seqBugCounterFile.getAbsoluteFile(), false);
+            bufferWriter = new BufferedWriter(fileWriter);
+
+            bufferWriter.flush();
+            bufferWriter.close();
+
+        } catch (IOException e) {
+
+        }
+
     }
 }
