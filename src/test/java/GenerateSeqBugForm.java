@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 public class GenerateSeqBugForm {
 
     public WindowsDriver rootDriver;
-    public NotepadPO notepad;
     public BugUtil bugUtil;
 
     private String bugType = "bc_seq_bug";

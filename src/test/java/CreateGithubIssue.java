@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.KeyInput;
+import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -33,7 +35,7 @@ public class CreateGithubIssue {
 
     private String date, month, day, dailyBugCount;
 
-    private String bugForm;
+    private String bugForm, bugName;
 
 
     @BeforeClass
@@ -46,11 +48,12 @@ public class CreateGithubIssue {
     public void createGitHubIssue() {
 
        getCompletedBugForm(1);
-//       getBugName();
+       getBugName();
        openChrome();
+//       maximizeBrowserWindow();
        openGitHubIssues();
        openNewIssue();
-//       inputIssueTitle();
+       inputIssueTitle();
        inputIssueBody();
 //       submitIssue();
 
@@ -67,10 +70,18 @@ public class CreateGithubIssue {
         // Need to get the correct Directory and file name
         bugDirectory = "C:\\Users\\cawoo\\Desktop\\" + bugFileName+bugNumber;
 
-        String bugFormFilePath = bugDirectory + "\\" + bugFileName + bugNumber +  ".txt";
+        String bugFormFilePath = bugDirectory + "\\" + bugFileName + bugNumber +  "_form.txt";
         System.out.println(bugFormFilePath);
         bugForm = bugUtil.readBugFormFile(bugFormFilePath);
         System.out.println(bugForm);
+    }
+
+    private void getBugName() {
+
+        int endOfName = bugForm.indexOf("\n");
+        bugName = bugForm.substring(0, endOfName);
+        System.out.println("Bug Name: " + bugName);
+
     }
 
     private void openChrome() {
@@ -81,10 +92,25 @@ public class CreateGithubIssue {
 //        action.build();
         action.perform();
 
+
+    }
+
+    private void maximizeBrowserWindow() {
+        Actions keyPress = new Actions(rootDriver);
+        keyPress.sendKeys(Keys.ALT)
+                .sendKeys(Keys.SPACE)
+                .sendKeys("x")
+                .perform();
+
     }
 
     private void openGitHubIssues() {
-        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
+//        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
+        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_automated_workflow/issues";
+
+        StringSelection selection = new StringSelection(gitHubIssuesUrl);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
 
         WebElement addressBar = rootDriver.findElementByName("Address and search bar");
         Actions action = new Actions(rootDriver);
@@ -93,7 +119,7 @@ public class CreateGithubIssue {
 //        action.build();
         action.perform();
 
-        addressBar.sendKeys(gitHubIssuesUrl);
+        addressBar.sendKeys(Keys.CONTROL + "v");
         addressBar.sendKeys(Keys.RETURN);
     }
 
@@ -125,6 +151,37 @@ public class CreateGithubIssue {
 
         // Need to perform some kind of paste action here
 
+    }
+
+    private void inputIssueTitle() {
+
+        // Copy the Bug Form to the clipboard
+        StringSelection selection = new StringSelection(bugName);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
+
+        String issueBodyId = "issue_title";
+        WebElement issueBody = rootDriver.findElementByAccessibilityId(issueBodyId);
+        Actions action = new Actions(rootDriver);
+        action.moveToElement(issueBody);
+        action.click();
+//        action.build();
+        action.perform();
+
+        issueBody.sendKeys(Keys.CONTROL + "v");
+
+    }
+
+    private void submitIssue() throws InterruptedException {
+        maximizeBrowserWindow();
+        Thread.sleep(2000);
+        String submitButton = "Submit new issue";
+        WebElement issueBody = rootDriver.findElementByAccessibilityId(submitButton);
+        Actions action = new Actions(rootDriver);
+        action.moveToElement(issueBody);
+        action.click();
+//        action.build();
+        action.perform();
     }
 
     private void getDateAndBugCount() {

@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 public class GenerateHubBugForm {
 
     public WindowsDriver rootDriver;
-    public NotepadPO notepad;
     public BugUtil bugUtil;
 
     private String bugType = "bc_hub_bug";
