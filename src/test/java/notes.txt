@@ -2,8 +2,8 @@
 Workflow Automation Project
 
 ToDo:
+Automate dragging and dropping pictures and videos into GitHub Issues
 Automate putting the bug name and id into test rails
-
 Automate linking git issues with test rails
 
 ****Work Log****
