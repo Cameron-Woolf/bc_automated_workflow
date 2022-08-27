@@ -45,7 +45,7 @@ public class CreateGithubIssue {
     }
 
     @Test
-    public void createGitHubIssue() {
+    public void createGitHubIssue() throws InterruptedException {
 
        getCompletedBugForm(1);
        getBugName();
@@ -55,7 +55,7 @@ public class CreateGithubIssue {
        openNewIssue();
        inputIssueTitle();
        inputIssueBody();
-//       submitIssue();
+       submitIssue();
 
     }
 
@@ -95,14 +95,6 @@ public class CreateGithubIssue {
 
     }
 
-    private void maximizeBrowserWindow() {
-        Actions keyPress = new Actions(rootDriver);
-        keyPress.sendKeys(Keys.ALT)
-                .sendKeys(Keys.SPACE)
-                .sendKeys("x")
-                .perform();
-
-    }
 
     private void openGitHubIssues() {
 //        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
@@ -176,12 +168,22 @@ public class CreateGithubIssue {
         maximizeBrowserWindow();
         Thread.sleep(2000);
         String submitButton = "Submit new issue";
-        WebElement issueBody = rootDriver.findElementByAccessibilityId(submitButton);
+        WebElement issueBody = rootDriver.findElementByName(submitButton);
         Actions action = new Actions(rootDriver);
         action.moveToElement(issueBody);
         action.click();
 //        action.build();
         action.perform();
+    }
+
+    private void maximizeBrowserWindow() {
+        Actions keyPress = new Actions(rootDriver);
+        keyPress.keyDown(Keys.COMMAND)
+                .sendKeys(Keys.ARROW_UP)
+                .perform();
+        keyPress.keyUp(Keys.COMMAND).perform();
+//        rootDriver.manage().window().maximize();
+
     }
 
     private void getDateAndBugCount() {
