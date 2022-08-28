@@ -1,16 +1,11 @@
 import io.appium.java_client.windows.WindowsDriver;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.KeyInput;
-import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utils.BugUtil;
+import utils.WindowsUtil;
 //import io.github.bonigarcia.wdm.WebDriverManager;
 
 
@@ -28,6 +23,7 @@ public class CreateGithubIssue {
 
     public WindowsDriver rootDriver;
     private BugUtil bugUtil;
+    private WindowsUtil windowsUtil;
 
     private String bugType = "bc_hub_bug";
 
@@ -42,21 +38,43 @@ public class CreateGithubIssue {
     public void setUpDriver() throws MalformedURLException {
         rootDriver = setUpRootDriver();
         bugUtil = new BugUtil();
+        windowsUtil = new WindowsUtil(rootDriver);
     }
 
     @Test
     public void createGitHubIssue() throws InterruptedException {
 
-       getCompletedBugForm(1);
-       getBugName();
-       openChrome();
-//       maximizeBrowserWindow();
-       openGitHubIssues();
-       openNewIssue();
-       inputIssueTitle();
-       inputIssueBody();
-       submitIssue();
+        // Minimize Test
+//        testFeatures();
+        runWorkFlow();
 
+    }
+
+    private void testFeatures()  {
+        // Minimize Test
+        try {
+            openChrome();
+            Thread.sleep(2000);
+            windowsUtil.minimizeAllWindows();
+            Thread.sleep(2000);
+            addPhotoToIssue();
+        }
+        catch (Exception e) {
+
+        }
+    }
+
+    private void runWorkFlow() throws InterruptedException {
+        getCompletedBugForm(1);
+        getBugName();
+        openChrome();
+        openGitHubIssues();
+        openNewIssue();
+        inputIssueTitle();
+        inputIssueBody();
+        submitIssue();
+//       addPhotoToIssue();
+//       addvideoToIssue();
     }
 
     private void getCompletedBugForm(int bugNumber) {
@@ -98,7 +116,7 @@ public class CreateGithubIssue {
 
     private void openGitHubIssues() {
 //        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
-        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_automated_workflow/issues";
+        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_workflow_automated/issues";
 
         StringSelection selection = new StringSelection(gitHubIssuesUrl);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -152,7 +170,7 @@ public class CreateGithubIssue {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(selection, selection);
 
-        String issueBodyId = "issue_title";
+        String issueBodyId = "issue_title"; // Automation ID from github
         WebElement issueBody = rootDriver.findElementByAccessibilityId(issueBodyId);
         Actions action = new Actions(rootDriver);
         action.moveToElement(issueBody);
@@ -165,8 +183,9 @@ public class CreateGithubIssue {
     }
 
     private void submitIssue() throws InterruptedException {
-        maximizeBrowserWindow();
-        Thread.sleep(2000);
+        WindowsUtil windowsUtil = new WindowsUtil(rootDriver);
+        windowsUtil.maximizeFocusedWindow();
+
         String submitButton = "Submit new issue";
         WebElement issueBody = rootDriver.findElementByName(submitButton);
         Actions action = new Actions(rootDriver);
@@ -176,15 +195,37 @@ public class CreateGithubIssue {
         action.perform();
     }
 
-    private void maximizeBrowserWindow() {
-        Actions keyPress = new Actions(rootDriver);
-        keyPress.keyDown(Keys.COMMAND)
-                .sendKeys(Keys.ARROW_UP)
-                .perform();
-        keyPress.keyUp(Keys.COMMAND).perform();
-//        rootDriver.manage().window().maximize();
+    private void addPhotoToIssue() throws InterruptedException {
+
+        windowsUtil.minimizeAllWindows();
+        Thread.sleep(2000);
+        // Open the Bug folder..
+        String bugDirectoryTest = "counter_bug"; // Just for testing
+        System.out.println(bugDirectoryTest);
+        WebElement bugFolder = rootDriver.findElementByName(bugDirectoryTest);
+        Actions actions = new Actions(rootDriver);
+        actions.moveToElement(bugFolder);
+        actions.doubleClick();
+        actions.perform();
+//        copyPicFile();
+//        maximizeChrome();
+//        scrollDown();
+//        pastPicFile();
+//        scrollDown();
+//        WebElement commentButton = rootDriver.findElementByName("Comment");
+//        Actions action = new Actions(rootDriver);
+//        action.moveToElement(commentButton);
+//        action.click();
+//        action.perform();
+
 
     }
+
+    private void addvideoToIssue() {
+
+    }
+
+
 
     private void getDateAndBugCount() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");;
