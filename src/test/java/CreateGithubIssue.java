@@ -165,7 +165,8 @@ public class CreateGithubIssue {
     }
 
     private void submitIssue() throws InterruptedException {
-        maximizeBrowserWindow();
+        WindowsUtil windowsUtil = new WindowsUtil(rootDriver);
+        windowsUtil.maximizeFocusedWindow();
         Thread.sleep(2000);
         String submitButton = "Submit new issue";
         WebElement issueBody = rootDriver.findElementByName(submitButton);
@@ -176,15 +177,6 @@ public class CreateGithubIssue {
         action.perform();
     }
 
-    private void maximizeBrowserWindow() {
-        Actions keyPress = new Actions(rootDriver);
-        keyPress.keyDown(Keys.COMMAND)
-                .sendKeys(Keys.ARROW_UP)
-                .perform();
-        keyPress.keyUp(Keys.COMMAND).perform();
-//        rootDriver.manage().window().maximize();
-
-    }
 
     private void getDateAndBugCount() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");;
