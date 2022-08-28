@@ -9,6 +9,8 @@ Automate linking git issues with test rails
 ****Work Log****
 8/26/22
 Automate putting the bug_form into git issues
+git remote add origin [repo-url]
+git remote set-url origin [repo-url]
 
 8/25/22
 Generate Bug form
