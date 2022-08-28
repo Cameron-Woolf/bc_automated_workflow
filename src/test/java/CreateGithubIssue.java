@@ -25,6 +25,7 @@ public class CreateGithubIssue {
 
     public WindowsDriver rootDriver;
     private BugUtil bugUtil;
+    private WindowsUtil windowsUtil;
 
     private String bugType = "bc_hub_bug";
 
@@ -39,6 +40,7 @@ public class CreateGithubIssue {
     public void setUpDriver() throws MalformedURLException {
         rootDriver = setUpRootDriver();
         bugUtil = new BugUtil();
+        windowsUtil = new WindowsUtil(rootDriver);
     }
 
     @Test
@@ -47,7 +49,7 @@ public class CreateGithubIssue {
         // Minimize Test
         openChrome();
         Thread.sleep(2000);
-        minimizeChrome();
+        windowsUtil.minimizeAllWindows();
         Thread.sleep(2000);
         addPhotoToIssue();
 
@@ -157,7 +159,7 @@ public class CreateGithubIssue {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(selection, selection);
 
-        String issueBodyId = "issue_title";
+        String issueBodyId = "issue_title"; // Automation ID from github
         WebElement issueBody = rootDriver.findElementByAccessibilityId(issueBodyId);
         Actions action = new Actions(rootDriver);
         action.moveToElement(issueBody);
@@ -182,18 +184,9 @@ public class CreateGithubIssue {
         action.perform();
     }
 
-    private void maximizeBrowserWindow() {
-        Actions keyPress = new Actions(rootDriver);
-        keyPress.keyDown(Keys.COMMAND)
-                .sendKeys(Keys.ARROW_UP)
-                .perform();
-        keyPress.keyUp(Keys.COMMAND).perform();
-
-    }
-    
     private void addPhotoToIssue() throws InterruptedException {
 
-        minimizeChrome();
+        windowsUtil.minimizeAllWindows();
         Thread.sleep(2000);
         // Open the Bug folder..
         String bugDirectoryTest = "counter_bug"; // Just for testing
@@ -221,28 +214,7 @@ public class CreateGithubIssue {
 
     }
 
-    private void minimizeChrome() {
-        Actions actions = new Actions(rootDriver);
-        actions.keyDown(Keys.COMMAND)
-                .sendKeys("m")
-                .perform();
-        actions.keyUp(Keys.COMMAND).perform();
-    }
 
-    private void scrollDown() throws InterruptedException {
-      //   Scroll Down
-//          String websiteWindow = "js-repo-pjax-container";
-//          WebElement webWindow = rootDriver.findElementByAccessibilityId(websiteWindow);
-//          Actions clickWindow = new Actions(rootDriver);
-//          clickWindow.moveToElement(webWindow);
-//          clickWindow.click();
-//          clickWindow.perform();
-
-          Thread.sleep(2000);
-          Actions pageDown = new Actions(rootDriver);
-          pageDown.sendKeys(Keys.PAGE_DOWN);
-          pageDown.perform();
-    }
 
     private void getDateAndBugCount() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");;

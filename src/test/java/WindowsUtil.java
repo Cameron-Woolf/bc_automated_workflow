@@ -19,6 +19,29 @@ public class WindowsUtil {
 //        rootDriver.manage().window().maximize();
 
         }
+
+    public void minimizeAllWindows() {
+        Actions actions = new Actions(rootDriver);
+        actions.keyDown(Keys.COMMAND)
+                .sendKeys("m")
+                .perform();
+        actions.keyUp(Keys.COMMAND).perform();
+    }
+
+    public void scrollDown() throws InterruptedException {
+        //   Scroll Down
+//          String websiteWindow = "js-repo-pjax-container";
+//          WebElement webWindow = rootDriver.findElementByAccessibilityId(websiteWindow);
+//          Actions clickWindow = new Actions(rootDriver);
+//          clickWindow.moveToElement(webWindow);
+//          clickWindow.click();
+//          clickWindow.perform();
+
+        Thread.sleep(2000);
+        Actions pageDown = new Actions(rootDriver);
+        pageDown.sendKeys(Keys.PAGE_DOWN);
+        pageDown.perform();
+    }
 }
 
 
