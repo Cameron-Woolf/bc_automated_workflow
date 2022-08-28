@@ -1,8 +1,5 @@
 import io.appium.java_client.windows.WindowsDriver;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -47,15 +44,23 @@ public class CreateGithubIssue {
     @Test
     public void createGitHubIssue() throws InterruptedException {
 
-       getCompletedBugForm(1);
-       getBugName();
-       openChrome();
-//       maximizeBrowserWindow();
-       openGitHubIssues();
-       openNewIssue();
-       inputIssueTitle();
-       inputIssueBody();
-       submitIssue();
+        // Minimize Test
+        openChrome();
+        Thread.sleep(2000);
+        minimizeChrome();
+        Thread.sleep(2000);
+        addPhotoToIssue();
+
+//       getCompletedBugForm(1);
+//       getBugName();
+//       openChrome();
+//       openGitHubIssues();
+//       openNewIssue();
+//       inputIssueTitle();
+//       inputIssueBody();
+//       submitIssue();
+//       addPhotoToIssue();
+////       addvideoToIssue();
 
     }
 
@@ -177,6 +182,67 @@ public class CreateGithubIssue {
         action.perform();
     }
 
+    private void maximizeBrowserWindow() {
+        Actions keyPress = new Actions(rootDriver);
+        keyPress.keyDown(Keys.COMMAND)
+                .sendKeys(Keys.ARROW_UP)
+                .perform();
+        keyPress.keyUp(Keys.COMMAND).perform();
+
+    }
+    
+    private void addPhotoToIssue() throws InterruptedException {
+
+        minimizeChrome();
+        Thread.sleep(2000);
+        // Open the Bug folder..
+        String bugDirectoryTest = "counter_bug"; // Just for testing
+        System.out.println(bugDirectoryTest);
+        WebElement bugFolder = rootDriver.findElementByName(bugDirectoryTest);
+        Actions actions = new Actions(rootDriver);
+        actions.moveToElement(bugFolder);
+        actions.doubleClick();
+        actions.perform();
+//        copyPicFile();
+//        maximizeChrome();
+//        scrollDown();
+//        pastPicFile();
+//        scrollDown();
+//        WebElement commentButton = rootDriver.findElementByName("Comment");
+//        Actions action = new Actions(rootDriver);
+//        action.moveToElement(commentButton);
+//        action.click();
+//        action.perform();
+
+
+    }
+
+    private void addvideoToIssue() {
+
+    }
+
+    private void minimizeChrome() {
+        Actions actions = new Actions(rootDriver);
+        actions.keyDown(Keys.COMMAND)
+                .sendKeys("m")
+                .perform();
+        actions.keyUp(Keys.COMMAND).perform();
+    }
+
+    private void scrollDown() throws InterruptedException {
+      //   Scroll Down
+//          String websiteWindow = "js-repo-pjax-container";
+//          WebElement webWindow = rootDriver.findElementByAccessibilityId(websiteWindow);
+//          Actions clickWindow = new Actions(rootDriver);
+//          clickWindow.moveToElement(webWindow);
+//          clickWindow.click();
+//          clickWindow.perform();
+
+          Thread.sleep(2000);
+          Actions pageDown = new Actions(rootDriver);
+          pageDown.sendKeys(Keys.PAGE_DOWN);
+          pageDown.perform();
+    }
 
     private void getDateAndBugCount() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");;
