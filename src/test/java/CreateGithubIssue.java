@@ -1,13 +1,11 @@
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.KeyInput;
-import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utils.BugUtil;
+import utils.WindowsUtil;
 //import io.github.bonigarcia.wdm.WebDriverManager;
 
 
@@ -47,23 +45,36 @@ public class CreateGithubIssue {
     public void createGitHubIssue() throws InterruptedException {
 
         // Minimize Test
+//        testFeatures();
+        runWorkFlow();
+
+    }
+
+    private void testFeatures()  {
+        // Minimize Test
+        try {
+            openChrome();
+            Thread.sleep(2000);
+            windowsUtil.minimizeAllWindows();
+            Thread.sleep(2000);
+            addPhotoToIssue();
+        }
+        catch (Exception e) {
+
+        }
+    }
+
+    private void runWorkFlow() throws InterruptedException {
+        getCompletedBugForm(1);
+        getBugName();
         openChrome();
-        Thread.sleep(2000);
-        windowsUtil.minimizeAllWindows();
-        Thread.sleep(2000);
-        addPhotoToIssue();
-
-//       getCompletedBugForm(1);
-//       getBugName();
-//       openChrome();
-//       openGitHubIssues();
-//       openNewIssue();
-//       inputIssueTitle();
-//       inputIssueBody();
-//       submitIssue();
+        openGitHubIssues();
+        openNewIssue();
+        inputIssueTitle();
+        inputIssueBody();
+        submitIssue();
 //       addPhotoToIssue();
-////       addvideoToIssue();
-
+//       addvideoToIssue();
     }
 
     private void getCompletedBugForm(int bugNumber) {
@@ -105,7 +116,7 @@ public class CreateGithubIssue {
 
     private void openGitHubIssues() {
 //        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
-        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_automated_workflow/issues";
+        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_workflow_automated/issues";
 
         StringSelection selection = new StringSelection(gitHubIssuesUrl);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -174,7 +185,7 @@ public class CreateGithubIssue {
     private void submitIssue() throws InterruptedException {
         WindowsUtil windowsUtil = new WindowsUtil(rootDriver);
         windowsUtil.maximizeFocusedWindow();
-        Thread.sleep(2000);
+
         String submitButton = "Submit new issue";
         WebElement issueBody = rootDriver.findElementByName(submitButton);
         Actions action = new Actions(rootDriver);

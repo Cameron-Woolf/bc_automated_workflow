@@ -1,3 +1,5 @@
+package utils;
+
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;

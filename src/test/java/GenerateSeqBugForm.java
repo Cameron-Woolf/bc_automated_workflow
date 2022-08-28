@@ -5,6 +5,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utils.BugUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
