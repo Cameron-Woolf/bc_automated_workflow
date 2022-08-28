@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class DeleteAllDesktopBugs {
 
-    @Test
+//    @Test
     public void deleteAllDekstopBugs() {
 
 
