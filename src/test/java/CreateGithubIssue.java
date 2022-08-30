@@ -65,14 +65,14 @@ public class CreateGithubIssue {
     }
 
     private void runWorkFlow() throws InterruptedException {
-        getCompletedBugForm(1);
+        getCompletedBugForm(4);
         getBugName();
         openChrome();
         openGitHubIssues();
         openNewIssue();
         inputIssueTitle();
         inputIssueBody();
-        submitIssue();
+//        submitIssue();
 //       addPhotoToIssue();
 //       addvideoToIssue();
     }
@@ -97,7 +97,7 @@ public class CreateGithubIssue {
     private void getBugName() {
 
         int endOfName = bugForm.indexOf("\n");
-        bugName = bugForm.substring(0, endOfName);
+        bugName = bugForm.substring(5, endOfName);
         System.out.println("Bug Name: " + bugName);
 
     }
@@ -115,8 +115,8 @@ public class CreateGithubIssue {
 
 
     private void openGitHubIssues() {
-//        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
-        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_workflow_automated/issues";
+        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
+//        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_workflow_automated/issues";
 
         StringSelection selection = new StringSelection(gitHubIssuesUrl);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
