@@ -65,14 +65,15 @@ public class CreateGithubIssue {
     }
 
     private void runWorkFlow() throws InterruptedException {
-        getCompletedBugForm(1);
+        getCompletedBugForm(5);
         getBugName();
         openChrome();
         openGitHubIssues();
         openNewIssue();
         inputIssueTitle();
         inputIssueBody();
-        submitIssue();
+        setLabels();
+//        submitIssue();
 //       addPhotoToIssue();
 //       addvideoToIssue();
     }
@@ -97,7 +98,7 @@ public class CreateGithubIssue {
     private void getBugName() {
 
         int endOfName = bugForm.indexOf("\n");
-        bugName = bugForm.substring(0, endOfName);
+        bugName = bugForm.substring(5, endOfName);
         System.out.println("Bug Name: " + bugName);
 
     }
@@ -179,6 +180,44 @@ public class CreateGithubIssue {
         action.perform();
 
         issueBody.sendKeys(Keys.CONTROL + "v");
+
+    }
+
+    private void setLabels() {
+
+        String labels = "Labels";
+        String searchBarAutomationId = "label-filter-field";
+        String versionNumberLabel = "v0.1.12-alpha";
+        String bugTextLabel = "bug Something isn't working";
+
+        WebElement labelSection = rootDriver.findElementByName(labels);
+
+        Actions actions = new Actions(rootDriver);
+        actions.moveToElement(labelSection);
+        actions.click();
+        actions.perform();
+
+        WebElement searchBar = rootDriver.findElementByAccessibilityId(searchBarAutomationId);
+
+        actions.moveToElement(searchBar);
+        actions.click();
+        actions.perform();
+
+        searchBar.sendKeys(bugTextLabel);
+        WebElement bugLabel = rootDriver.findElementByName(bugTextLabel);
+        actions.moveToElement(bugLabel);
+        actions.click();
+        actions.perform();
+        searchBar.clear();
+
+        searchBar.sendKeys(versionNumberLabel);
+        WebElement versionLabel = rootDriver.findElementByName(versionNumberLabel);
+        actions.moveToElement(versionLabel);
+        actions.click();
+        actions.perform();
+        searchBar.clear();
+
+        searchBar.sendKeys(Keys.ESCAPE);
 
     }
 

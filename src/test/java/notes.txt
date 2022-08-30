@@ -3,9 +3,13 @@ Workflow Automation Project
 
 ToDo:
 Automate dragging and dropping pictures and videos into GitHub Issues
+Add bug and version labels to git issues
+
+
+
 Automate putting the bug name and id into test rails
 Automate cross referencing git issues and test rails
-Write a util method that stashes all the bugs into Added_to_Asana, or deletes them
+Write a util method that stashes all the added bugs into Added_to_Asana, or deletes them
 
 ****Work Log****
 8/26/22
