@@ -18,7 +18,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Drivers {
 
-    private WindowsDriver setUpRootDriver() throws MalformedURLException {
+
+    public class Driver {
+
+    }
+    public WindowsDriver setUpRootDriver() throws MalformedURLException {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("app", "Root");
