@@ -5,6 +5,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.BugUtil;
+import utils.Drivers;
 import utils.WindowsUtil;
 //import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -36,7 +37,7 @@ public class CreateGithubIssue {
 
     @BeforeClass
     public void setUpDriver() throws MalformedURLException {
-        rootDriver = setUpRootDriver();
+        rootDriver = new Drivers().setUpRootDriver();
         bugUtil = new BugUtil();
         windowsUtil = new WindowsUtil(rootDriver);
     }
@@ -65,7 +66,7 @@ public class CreateGithubIssue {
     }
 
     private void runWorkFlow() throws InterruptedException {
-        getCompletedBugForm(5);
+        getCompletedBugForm(1);
         getBugName();
         openChrome();
         openGitHubIssues();
