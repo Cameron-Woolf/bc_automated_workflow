@@ -12,9 +12,13 @@ import java.awt.datatransfer.StringSelection;
 public class WindowsUtil {
 
     WindowsDriver rootDriver;
+    Actions action;
 
     public WindowsUtil(WindowsDriver rootDriver) {
+
         this.rootDriver = rootDriver;
+        this.action = new Actions(rootDriver);
+
     }
 
     public void maximizeFocusedWindow() {
@@ -28,23 +32,28 @@ public class WindowsUtil {
         }
 
     public void minimizeAllWindows() {
-        Actions actions = new Actions(rootDriver);
-        actions.keyDown(Keys.COMMAND)
+        action.keyDown(Keys.COMMAND)
                 .sendKeys("m")
                 .perform();
-        actions.keyUp(Keys.COMMAND).perform();
+        action.keyUp(Keys.COMMAND).perform();
     }
 
 
     public void openChrome() {
         WebElement chrome = rootDriver.findElementByName("Cameron (BC Main) - Chrome");
-        Actions action = new Actions(rootDriver);
         action.moveToElement(chrome);
         action.doubleClick();
 //        action.build();
         action.perform();
 
 
+    }
+
+    public void openSearchBar() {
+        action.keyDown(Keys.CONTROL)
+                .sendKeys("f")
+                .perform();
+        action.keyUp(Keys.CONTROL).perform();
     }
 
     public void openUrl(String url) {
@@ -79,6 +88,7 @@ public class WindowsUtil {
         pageDown.sendKeys(Keys.PAGE_DOWN);
         pageDown.perform();
     }
+
 }
 
 

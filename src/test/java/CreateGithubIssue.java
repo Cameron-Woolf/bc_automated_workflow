@@ -66,7 +66,7 @@ public class CreateGithubIssue {
     }
 
     private void runWorkFlow() throws InterruptedException {
-        getCompletedBugForm(5);
+        getCompletedBugForm(1);
         getBugName();
         openChrome();
         openGitHubIssues();
