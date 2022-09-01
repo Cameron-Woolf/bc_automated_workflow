@@ -54,6 +54,7 @@ public class WindowsUtil {
                 .sendKeys("f")
                 .perform();
         action.keyUp(Keys.CONTROL).perform();
+
     }
 
     public void openUrl(String url) {
@@ -72,6 +73,12 @@ public class WindowsUtil {
 
         addressBar.sendKeys(Keys.CONTROL + "v");
         addressBar.sendKeys(Keys.RETURN);
+    }
+
+    public void copyToClipBoard(String content) {
+        StringSelection selection = new StringSelection(content);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
     }
 
     public void scrollDown() throws InterruptedException {

@@ -66,7 +66,7 @@ public class CreateGithubIssue {
     }
 
     private void runWorkFlow() throws InterruptedException {
-        getCompletedBugForm(1);
+        getCompletedBugForm(3);
         getBugName();
         openChrome();
         openGitHubIssues();
@@ -117,8 +117,8 @@ public class CreateGithubIssue {
 
 
     private void openGitHubIssues() {
-//        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
-        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_workflow_automated/issues";
+        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
+//        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_workflow_automated/issues";
 
         StringSelection selection = new StringSelection(gitHubIssuesUrl);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -161,7 +161,6 @@ public class CreateGithubIssue {
 
         issueBody.sendKeys(Keys.CONTROL + "v");
 
-        // Need to perform some kind of paste action here
 
     }
 
