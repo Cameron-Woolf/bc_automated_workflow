@@ -91,7 +91,7 @@ public class GenerateHubBugForm {
                         + "ID: bc_hub_bug_"+month+"_"+day+"_"+0+dailyBugCount +"\n"
                         + "Date: "+ date + "\n"
                         + "OS/Browser: Windows, Scorpion \n"
-                        + "Hub/Sequencer Version: Copyright 0.1.12-alpha / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.10 \n\n"
+                        + "Hub/Sequencer Version: Copyright  0.1.15-beta / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.11 \n\n"
                         + "Steps: \n\n\n"
                         + "Description: ";
 
