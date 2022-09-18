@@ -26,7 +26,8 @@ public class CreateGithubIssue {
     private BugUtil bugUtil;
     private WindowsUtil windowsUtil;
 
-    private String bugType = "bc_hub_bug";
+//    private String bugType = "bc_hub_bug";
+    private String bugType = "bc_seq_bug";
 
     private String bugFileName, bugDirectory;
 
@@ -66,7 +67,7 @@ public class CreateGithubIssue {
     }
 
     private void runWorkFlow() throws InterruptedException {
-        getCompletedBugForm(3);
+        getCompletedBugForm(11);
         getBugName();
         openChrome();
         openGitHubIssues();
@@ -117,8 +118,12 @@ public class CreateGithubIssue {
 
 
     private void openGitHubIssues() {
-        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
+        // Url for the Hub
+//        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
+        // Url for personal gitHub for testing
 //        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_workflow_automated/issues";
+       // Url for the Sequencer
+        String gitHubIssuesUrl = "https://github.com/BeatConnect/BeatConnect2/issues";
 
         StringSelection selection = new StringSelection(gitHubIssuesUrl);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -187,7 +192,7 @@ public class CreateGithubIssue {
 
         String labels = "Labels";
         String searchBarAutomationId = "label-filter-field";
-        String versionNumberLabel = "v0.1.12-alpha";
+        String versionNumberLabel = "v0.1.13-alpha";
         String bugTextLabel = "bug Something isn't working";
 
         WebElement labelSection = rootDriver.findElementByName(labels);
@@ -210,12 +215,12 @@ public class CreateGithubIssue {
         actions.perform();
         searchBar.clear();
 
-        searchBar.sendKeys(versionNumberLabel);
-        WebElement versionLabel = rootDriver.findElementByName(versionNumberLabel);
-        actions.moveToElement(versionLabel);
-        actions.click();
-        actions.perform();
-        searchBar.clear();
+//        searchBar.sendKeys(versionNumberLabel);
+//        WebElement versionLabel = rootDriver.findElementByName(versionNumberLabel);
+//        actions.moveToElement(versionLabel);
+//        actions.click();
+//        actions.perform();
+//        searchBar.clear();
 
         searchBar.sendKeys(Keys.ESCAPE);
 

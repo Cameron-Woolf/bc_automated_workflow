@@ -70,7 +70,7 @@ public class GenerateSeqBugForm {
 
     public void generateBugFormFile() throws IOException {
 
-        String bugForm = "C:\\Users\\cawoo\\Desktop\\" + fileName +"\\"+ fileName+ ".txt";
+        String bugForm = "C:\\Users\\cawoo\\Desktop\\" + fileName +"\\"+ fileName+ "_form.txt";
         File file = new File(bugForm); //initialize File object and passing path as argument
         boolean result = file.createNewFile();
         if (result) {
@@ -91,7 +91,7 @@ public class GenerateSeqBugForm {
                         + "ID: bc_seq_bug_"+month+"_"+day+"_"+0+dailyBugCount +"\n"
                         + "Date: "+ date + "\n"
                         + "OS/Browser: Windows, Scorpion \n"
-                        + "Hub/Sequencer Version: Copyright 0.1.12-alpha / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.10 \n\n"
+                        + "Hub/Sequencer Version: Copyright 0.1.16-beta / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.10 \n\n"
                         + "Steps: \n\n\n"
                         + "Description: ";
 
