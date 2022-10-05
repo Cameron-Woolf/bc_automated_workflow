@@ -2,7 +2,7 @@
 
 Generates correct folder and file names for Bugs IDs
 
-Genreates Bug Forms for bc_hub bc_seq
+Genreates Bug Forms for bc_hub and bc_seq
 
 Creates new git issue for ethier bc_hub or bc_seq
 
