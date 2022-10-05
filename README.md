@@ -1,5 +1,7 @@
 *** Automation for routine QA Tasks ***
 
+Uses WinAppDriver for Automating Windows Desktop tasks
+
 Generates correct folder and file names for Bugs IDs
 
 Genreates Bug Forms for bc_hub and bc_seq
