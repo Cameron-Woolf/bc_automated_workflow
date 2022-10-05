@@ -1,1 +1,5 @@
-
+*** Automation for routine QA Tasks ***
+Generates correct folder and file names for Bugs IDs
+Genreates Bug Forms for bc_hub bc_seq
+Creates new git issue for ethier bc_hub or bc_seq
+Cleans up and resets the daily bug counter to correctly generate file and folder name for Bug IDs
