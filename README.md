@@ -7,6 +7,7 @@ https://github.com/microsoft/WinAppDriver
 https://www.jetbrains.com/idea/download/#section=windows
 
 ***Features***
+
 Generates correct folder and file names for Bugs IDs
 
 Genreates Bug Forms for bc_hub and bc_seq
