@@ -1,6 +1,7 @@
 *** Automation for routine QA Tasks ***
 
 Uses WinAppDriver for Automating Windows Desktop tasks
+https://github.com/microsoft/WinAppDriver
 
 Generates correct folder and file names for Bugs IDs
 
