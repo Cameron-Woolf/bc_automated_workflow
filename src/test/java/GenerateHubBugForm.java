@@ -64,13 +64,13 @@ public class GenerateHubBugForm {
     }
 
     public void generateBugDirectory() throws IOException {
-        String bugDirectory = "C:\\Users\\cawoo\\Desktop\\" + fileName;
+        String bugDirectory = "C:\\Users\\camer\\OneDrive\\Desktop\\" + fileName;
         Files.createDirectories(Paths.get(bugDirectory));
     }
 
     public void generateBugFormFile() throws IOException {
 
-        String bugForm = "C:\\Users\\cawoo\\Desktop\\" + fileName +"\\"+ fileName+ "_form.txt";
+        String bugForm = "C:\\Users\\camer\\OneDrive\\Desktop\\" + fileName +"\\"+ fileName+ "_form.txt";
         File file = new File(bugForm); //initialize File object and passing path as argument
         boolean result = file.createNewFile();
         if (result) {

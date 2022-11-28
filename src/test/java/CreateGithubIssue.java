@@ -27,7 +27,7 @@ public class CreateGithubIssue {
     private WindowsUtil windowsUtil;
 
 //    private String bugType = "bc_hub_bug";
-    private String bugType = "bc_seq_bug";
+    private String bugType = "bc_hub_bug";
 
     private String bugFileName, bugDirectory;
 
@@ -67,11 +67,11 @@ public class CreateGithubIssue {
     }
 
     private void runWorkFlow() throws InterruptedException {
-        getCompletedBugForm(11);
+        getCompletedBugForm(1);
         getBugName();
         openChrome();
         openGitHubIssues();
-        openNewIssue();
+//        openNewIssue();
         inputIssueTitle();
         inputIssueBody();
         setLabels();
@@ -89,7 +89,7 @@ public class CreateGithubIssue {
         bugFileName = bugFileName;
 
         // Need to get the correct Directory and file name
-        bugDirectory = "C:\\Users\\cawoo\\Desktop\\" + bugFileName+bugNumber;
+        bugDirectory = "C:\\Users\\camer\\OneDrive\\Desktop\\" + bugFileName+bugNumber;
 
         String bugFormFilePath = bugDirectory + "\\" + bugFileName + bugNumber +  "_form.txt";
         System.out.println(bugFormFilePath);
@@ -106,7 +106,7 @@ public class CreateGithubIssue {
     }
 
     private void openChrome() {
-        WebElement chrome = rootDriver.findElementByName("Cameron (BC Main) - Chrome");
+        WebElement chrome = rootDriver.findElementByName("Google Chrome");
         Actions action = new Actions(rootDriver);
         action.moveToElement(chrome);
         action.doubleClick();
@@ -119,11 +119,11 @@ public class CreateGithubIssue {
 
     private void openGitHubIssues() {
         // Url for the Hub
-//        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues";
+        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues/new";
         // Url for personal gitHub for testing
 //        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_workflow_automated/issues";
        // Url for the Sequencer
-        String gitHubIssuesUrl = "https://github.com/BeatConnect/BeatConnect2/issues";
+//        String gitHubIssuesUrl = "https://github.com/BeatConnect/BeatConnect2/issues";
 
         StringSelection selection = new StringSelection(gitHubIssuesUrl);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();

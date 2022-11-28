@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 public class BugUtil {
 
-    private String bugCounterHubFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_bug\\counter_hub_bug_v1.txt";
-    private String bugCounterSeqFileLocation= "C:\\Users\\cawoo\\Desktop\\counter_bug\\counter_seq_bug_v1.txt";
+    private String bugCounterHubFileLocation= "C:\\Users\\camer\\OneDrive\\Desktop\\counter_bug\\counter_hub_bug_v1.txt";
+    private String bugCounterSeqFileLocation= "C:\\Users\\camer\\OneDrive\\Desktop\\counter_bug\\counter_seq_bug_v1.txt";
     private static final Gson gson = new Gson();
 
     public class BugCounter {
