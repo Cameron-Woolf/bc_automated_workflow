@@ -87,13 +87,16 @@ public class GenerateHubBugForm {
     private void formatBugForm(String fileName) {
 
         String hub_bug_form =
-                "Name: \n"
+                        "**Version/Platform Info** \n"
                         + "ID: bc_hub_bug_"+month+"_"+day+"_"+0+dailyBugCount +"\n"
                         + "Date: "+ date + "\n"
                         + "OS/Browser: Windows, Scorpion \n"
-                        + "Hub/Sequencer Version: Copyright  0.1.15-beta / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.11 \n\n"
-                        + "Steps: \n\n\n"
-                        + "Description: ";
+                        + "Hub/Sequencer Version: Copyright  0.2.0 / BeatConnect DAW 4.0.4/ BeatConnectLib 4.0.19 \n\n"
+                        + "**Describe the bug** \n\n\n "
+                        + "**To Reproduce** \n\n\n"
+                        +"**Expected behavior** \n\n\n"
+                        +"**Screenshots + Video** \n\n\n"
+                        +"**Additional context** \n\n\n";
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(fileName, true);  // true for append mode
