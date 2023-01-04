@@ -27,7 +27,7 @@ public class CreateGithubIssue {
     private WindowsUtil windowsUtil;
 
 //    private String bugType = "bc_hub_bug";
-    private String bugType = "bc_hub_bug";
+    private String bugType = "bc_seq_bug";
 
     private String bugFileName, bugDirectory;
 
@@ -67,7 +67,7 @@ public class CreateGithubIssue {
     }
 
     private void runWorkFlow() throws InterruptedException {
-        getCompletedBugForm(1);
+        getCompletedBugForm(2);
         getBugName();
         openChrome();
         openGitHubIssues();
@@ -89,7 +89,7 @@ public class CreateGithubIssue {
         bugFileName = bugFileName;
 
         // Need to get the correct Directory and file name
-        bugDirectory = "C:\\Users\\camer\\OneDrive\\Desktop\\" + bugFileName+bugNumber;
+        bugDirectory = "C:\\Users\\camer\\Desktop\\" + bugFileName+bugNumber;
 
         String bugFormFilePath = bugDirectory + "\\" + bugFileName + bugNumber +  "_form.txt";
         System.out.println(bugFormFilePath);
@@ -119,11 +119,11 @@ public class CreateGithubIssue {
 
     private void openGitHubIssues() {
         // Url for the Hub
-        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues/new";
+//        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_js_workspace/issues/new";
         // Url for personal gitHub for testing
 //        String gitHubIssuesUrl = "https://github.com/Cameron-Woolf/bc_workflow_automated/issues";
        // Url for the Sequencer
-//        String gitHubIssuesUrl = "https://github.com/BeatConnect/BeatConnect2/issues";
+        String gitHubIssuesUrl = "https://github.com/BeatConnect/bc_unity_daw/issues/new";
 
         StringSelection selection = new StringSelection(gitHubIssuesUrl);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();

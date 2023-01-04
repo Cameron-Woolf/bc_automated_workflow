@@ -43,7 +43,7 @@ public class GenerateSeqBugForm {
             setFileName();
             generateBugDirectory();
             generateBugFormFile();
-            openBugForm();
+//            openBugForm();
 
     }
 
@@ -64,13 +64,13 @@ public class GenerateSeqBugForm {
     }
 
     public void generateBugDirectory() throws IOException {
-        String bugDirectory = "C:\\Users\\cawoo\\Desktop\\" + fileName;
+        String bugDirectory = "C:\\Users\\camer\\Desktop\\" + fileName;
         Files.createDirectories(Paths.get(bugDirectory));
     }
 
     public void generateBugFormFile() throws IOException {
 
-        String bugForm = "C:\\Users\\cawoo\\Desktop\\" + fileName +"\\"+ fileName+ "_form.txt";
+        String bugForm = "C:\\Users\\camer\\Desktop\\" + fileName +"\\"+ fileName+ "_form.txt";
         File file = new File(bugForm); //initialize File object and passing path as argument
         boolean result = file.createNewFile();
         if (result) {
@@ -87,13 +87,16 @@ public class GenerateSeqBugForm {
     private void formatBugForm(String fileName) {
 
         String hub_bug_form =
-                "Name: \n"
+                "Name:\n"+
+                "**Version/Platform Info** \n"
                         + "ID: bc_seq_bug_"+month+"_"+day+"_"+0+dailyBugCount +"\n"
                         + "Date: "+ date + "\n"
-                        + "OS/Browser: Windows, Scorpion \n"
-                        + "Hub/Sequencer Version: Copyright 0.1.16-beta / BeatConnect DAW 3.0.15/ BeatConnectLib 4.0.10 \n\n"
-                        + "Steps: \n\n\n"
-                        + "Description: ";
+                        + "OS/Branch: Windows, develop \n\n"
+                        + "**Describe the bug** \n\n\n "
+                        + "**To Reproduce** \n\n\n"
+                        +"**Expected behavior** \n\n\n"
+                        +"**Screenshots + Video** \n\n\n"
+                        +"**Additional context** \n\n\n";
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(fileName, true);  // true for append mode
